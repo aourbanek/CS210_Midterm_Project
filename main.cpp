@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include "sll.cpp"
 using namespace std;
 
 class CSVReader {
@@ -27,4 +28,15 @@ public:
         file.close();
         return data;
     }
+};
+
+template<typename T>
+struct School
+{
+    string name;
+    string address;
+    string city;
+    string state;
+    string county;
+    Node<T>* next;
 };
