@@ -39,12 +39,8 @@ public:
         }
         else
         {
-            School* temp = head;
-            while (temp->next != nullptr)
-            {
-                temp = temp->next;
-            }
-            temp->next = newSchool;
+            newSchool->next = head;
+            head = newSchool;
         }
     }
     void insertLast(string name, string address, string city, string state, string county)
