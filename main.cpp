@@ -4,13 +4,13 @@
 #include <vector>
 using namespace std;
 
-template<typename T>
-struct Node
-{
-    T data;
-    Node* next;
-    Node(T val) : data(val), next(nullptr) {}
-};
+//template<typename T>
+//struct Node
+//{
+//    T data;
+//    Node* next;
+//    Node(T val) : data(val), next(nullptr) {}
+//};
 
 template<typename T>
 struct School
