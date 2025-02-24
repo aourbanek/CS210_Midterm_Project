@@ -129,3 +129,10 @@ public:
         return data;
     }
 };
+
+int main()
+{
+    CSVReader fileReading;
+    string filename = "schools.csv";
+    vector<vector<string>> data = fileReading.readCSV("schools.csv");
+}
