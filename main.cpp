@@ -101,15 +101,15 @@ public:
             return;
         }
     }
-    void printList()
+    void display()
     {
         School* temp = head;
+        cout << "List of Schools:" << endl;
         while (temp != nullptr)
         {
-            cout << temp->data << " -> ";
+            cout << temp->name << endl;
             temp = temp->next;
         }
-        cout << "nullptr" << endl;
     }
 };
 
