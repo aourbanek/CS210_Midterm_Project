@@ -136,10 +136,13 @@ int main()
     string filename = "schools.csv";
     vector<vector<string>> data = fileReading.readCSV("schools.csv");
 
-    SchoolList list = new SchoolList();
+    SchoolList list;
     for (vector<string> item : data)
     {
-        list.insertLast(item[0], item[1], item[2], item[3], item[4]);
+        if (item != data[0]) // Skips first line of data labels
+        {
+            list.insertLast(item[0], item[1], item[2], item[3], item[4]);
+        }
     }
 
     list.display();
