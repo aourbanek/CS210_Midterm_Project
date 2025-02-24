@@ -60,6 +60,23 @@ public:
             temp->next = newSchool;
         }
     }
+    void deleteByName(string name)
+    {
+        School* current = head;
+        School* prev = nullptr;
+
+        while (current && current->name != name)
+        {
+            prev = current;
+            current = current->next;
+        }
+
+        if (!current)
+        {
+            cout << "Error: School not found.";
+            return;
+        }
+    }
     void printList()
     {
         School* temp = head;
