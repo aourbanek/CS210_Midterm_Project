@@ -12,7 +12,6 @@ using namespace std;
 //    Node(T val) : data(val), next(nullptr) {}
 //};
 
-template<typename T>
 struct School
 {
     string name;
@@ -24,34 +23,50 @@ struct School
     School(string val1, string val2, string val3, string val4, string val5) : name(val1), address(val2), city(val3), state(val4), county(val5), next(nullptr) {}
 };
 
-template<typename T>
-class SinglyLinkedList
+class SchoolList
 {
-    Node<T>* head;
+    School* head;
 
 public:
-    SinglyLinkedList() : head(nullptr) {}
+    SchoolList() : head(nullptr) {}
 
-    void append(T data)
+    void insertFirst(string name, string address, string city, string state, string county)
     {
-        Node<T>* newNode = new Node<T>(data);
+        School* newSchool = new School(name, address, city, state, county);
         if (head == nullptr)
         {
-            head = newNode;
+            head = newSchool;
         }
         else
         {
-            Node<T>* temp = head;
+            School* temp = head;
             while (temp->next != nullptr)
             {
                 temp = temp->next;
             }
-            temp->next = newNode;
+            temp->next = newSchool;
+        }
+    }
+    void insertLast(string name, string address, string city, string state, string county)
+    {
+        School* newSchool = new School(name, address, city, state, county);
+        if (head == nullptr)
+        {
+            head = newSchool;
+        }
+        else
+        {
+            School* temp = head;
+            while (temp->next != nullptr)
+            {
+                temp = temp->next;
+            }
+            temp->next = newSchool;
         }
     }
     void printList()
     {
-        Node<T>* temp = head;
+        School* temp = head;
         while (temp != nullptr)
         {
             cout << temp->data << " -> ";
