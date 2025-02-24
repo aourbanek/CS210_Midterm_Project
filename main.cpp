@@ -135,4 +135,12 @@ int main()
     CSVReader fileReading;
     string filename = "schools.csv";
     vector<vector<string>> data = fileReading.readCSV("schools.csv");
+
+    SchoolList list = new SchoolList();
+    for (vector<string> item : data)
+    {
+        list.insertLast(item[0], item[1], item[2], item[3], item[4]);
+    }
+
+    list.display();
 }
