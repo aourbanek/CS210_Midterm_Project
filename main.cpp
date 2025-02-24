@@ -69,7 +69,31 @@ public:
         {
             prev = current;
             current = current->next;
+
+            prev->next = current->next;
+            delete current;
         }
+
+        if (!current)
+        {
+            cout << "Error: School not found.";
+            return;
+        }
+    }
+    void findByName(string name)
+    {
+        School* current = head;
+
+        while (current && current->name != name)
+        {
+            current = current->next;
+        }
+
+        cout << "School found: " << current->name    << endl;
+        cout << "Address: "      << current->address << endl;
+        cout << "City   : "      << current->city    << endl;
+        cout << "State  : "      << current->state   << endl;
+        cout << "County : "      << current->county  << endl;
 
         if (!current)
         {
