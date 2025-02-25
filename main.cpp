@@ -97,7 +97,7 @@ public:
         cout << "Address: " << current->address << endl;
         cout << "City   : " << current->city << endl;
         cout << "State  : " << current->state << endl;
-        cout << "County : " << current->county << endl;
+        cout << "County : " << current->county << endl << endl;
 
         return;
     }
@@ -144,7 +144,7 @@ void interface(int choice, SchoolList list)
 {
     int input = -1;
     char doMore = ' ';
-    string searchKey = "";
+    string searchKey;
 
     if (choice < 0 || choice > 4)
     {
@@ -166,7 +166,9 @@ void interface(int choice, SchoolList list)
         break;
     case 1: // School search
         cout << "Enter the name of a school (in all caps):" << endl;
-        cin >> searchKey;
+        // This getline() took many attempts to properly include whitespaces;
+        // solution found @ https://www.reddit.com/r/cpp_questions/comments/15n91xf/how_do_i_store_user_input_with_spaces_in_a_string/
+        std::getline(std::cin >> std::ws, searchKey);
         list.findByName(searchKey);
 
         cout << "Would you like to do more? (y/n)" << endl;
@@ -208,8 +210,6 @@ int main()
     cout << "ALAN URBANEK" << endl;
     cout << "CS 210 MIDTERM MILESTONE 2" << endl;
     cout << "SCHOOL DATABASE" << endl << endl;
-
-    list.display();
 
     interface(0, list);
 
