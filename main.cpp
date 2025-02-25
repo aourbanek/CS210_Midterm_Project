@@ -220,6 +220,8 @@ void interface(int choice, SchoolList list)
         }
         break;
     case 4: // Quit
+        cout << "Ok. Goodbye!";
+        return;
         break;
     }
 }
