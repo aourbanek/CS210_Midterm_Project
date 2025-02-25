@@ -65,16 +65,18 @@ public:
         {
             prev = current;
             current = current->next;
-
-            prev->next = current->next;
-            delete current;
         }
 
         if (!current)
         {
-            cout << "Error: School not found." << endl;
+            cout << "Error: School not found." << endl << endl;
             return;
         }
+
+        prev->next = current->next;
+        delete current;
+
+        cout << "School deleted." << endl << endl;
 
         return;
     }
@@ -144,7 +146,7 @@ void interface(int choice, SchoolList list)
 {
     int input = -1;
     char doMore = ' ';
-    string searchKey;
+    string searchKey = "";
 
     if (choice < 0 || choice > 4)
     {
@@ -184,6 +186,21 @@ void interface(int choice, SchoolList list)
         }
         break;
     case 2: // School deletion
+        cout << "Enter the name of a school (in all caps):" << endl;
+        std::getline(std::cin >> std::ws, searchKey);
+        list.deleteByName(searchKey);
+
+        cout << "Would you like to do more? (y/n)" << endl;
+        cin >> doMore;
+        switch (doMore)
+        {
+        case 'y':
+            interface(0, list);
+            break;
+        case 'n':
+            interface(4, list);
+            break;
+        }
         break;
     case 3: // School display
         break;
