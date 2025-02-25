@@ -34,6 +34,8 @@ public:
             newSchool->next = head;
             head = newSchool;
         }
+
+        return;
     }
     void insertLast(string name, string address, string city, string state, string county)
     {
@@ -51,6 +53,8 @@ public:
             }
             temp->next = newSchool;
         }
+
+        return;
     }
     void deleteByName(string name)
     {
@@ -68,30 +72,34 @@ public:
 
         if (!current)
         {
-            cout << "Error: School not found.";
+            cout << "Error: School not found." << endl;
             return;
         }
+
+        return;
     }
     void findByName(string name)
     {
         School* current = head;
 
-        while (current->name != name && current)
+        while (current && current->name != name)
         {
             current = current->next;
         }
 
-        cout << "School found: " << current->name    << endl;
-        cout << "Address: "      << current->address << endl;
-        cout << "City   : "      << current->city    << endl;
-        cout << "State  : "      << current->state   << endl;
-        cout << "County : "      << current->county  << endl;
-
         if (!current)
         {
-            cout << "Error: School not found.";
+            cout << "Error: School not found." << endl;
             return;
         }
+
+        cout << "School found: " << current->name << endl;
+        cout << "Address: " << current->address << endl;
+        cout << "City   : " << current->city << endl;
+        cout << "State  : " << current->state << endl;
+        cout << "County : " << current->county << endl;
+
+        return;
     }
     void display()
     {
@@ -102,6 +110,8 @@ public:
             cout << temp->name << endl;
             temp = temp->next;
         }
+
+        return;
     }
 };
 
@@ -159,7 +169,7 @@ void interface(int choice, SchoolList list)
         cin >> searchKey;
         list.findByName(searchKey);
 
-        cout << "Would you like to do more? (y/n)";
+        cout << "Would you like to do more? (y/n)" << endl;
         cin >> doMore;
         switch (doMore)
         {
@@ -199,7 +209,9 @@ int main()
     cout << "CS 210 MIDTERM MILESTONE 2" << endl;
     cout << "SCHOOL DATABASE" << endl << endl;
 
-    interface(0);
+    list.display();
+
+    interface(0, list);
 
     return 0;
 }
