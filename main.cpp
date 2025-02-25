@@ -76,7 +76,7 @@ public:
     {
         School* current = head;
 
-        while (current && current->name != name)
+        while (current->name != name && current)
         {
             current = current->next;
         }
@@ -130,19 +130,21 @@ public:
     }
 };
 
-void interface(int choice)
+void interface(int choice, SchoolList list)
 {
     int input = -1;
+    char doMore = ' ';
+    string searchKey = "";
 
     if (choice < 0 || choice > 4)
     {
         cout << "Error: Invalid choice." << endl;
-        interface(0);
+        interface(0, list);
     }
 
     switch (choice)
     {
-    case 0: // Initial call
+    case 0: // Initial call and "doing more" case
         cout << "What would you like to do? (Enter number)" << endl;
         cout << "1. Search for a school by name" << endl;
         cout << "2. Delete a school by name" << endl;
@@ -150,9 +152,24 @@ void interface(int choice)
         cout << "4. Quit" << endl;
 
         cin >> input;
-        interface(input);
+        interface(input, list);
         break;
     case 1: // School search
+        cout << "Enter the name of a school (in all caps):" << endl;
+        cin >> searchKey;
+        list.findByName(searchKey);
+
+        cout << "Would you like to do more? (y/n)";
+        cin >> doMore;
+        switch (doMore)
+        {
+        case 'y':
+            interface(0, list);
+            break;
+        case 'n':
+            interface(4, list);
+            break;
+        }
         break;
     case 2: // School deletion
         break;
