@@ -113,6 +113,8 @@ public:
             temp = temp->next;
         }
 
+        cout << endl;
+
         return;
     }
 };
@@ -203,6 +205,19 @@ void interface(int choice, SchoolList list)
         }
         break;
     case 3: // School display
+        list.display();
+
+        cout << "Would you like to do more? (y/n)" << endl;
+        cin >> doMore;
+        switch (doMore)
+        {
+        case 'y':
+            interface(0, list);
+            break;
+        case 'n':
+            interface(4, list);
+            break;
+        }
         break;
     case 4: // Quit
         break;
