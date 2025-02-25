@@ -78,7 +78,7 @@ public:
 
         cout << "School deleted." << endl << endl;
 
-        return;
+        return
     }
     void findByName(string name)
     {
@@ -229,8 +229,8 @@ void interface(int choice, SchoolList list)
 int main()
 {
     CSVReader fileReading;
-    string filename = "schools.csv";
-    vector<vector<string>> data = fileReading.readCSV("schools.csv");
+    string filename = "Illinois_Schools.csv";
+    vector<vector<string>> data = fileReading.readCSV("Illinois_Schools.csv");
 
     SchoolList list;
     for (vector<string> item : data)
