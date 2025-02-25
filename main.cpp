@@ -130,6 +130,23 @@ public:
     }
 };
 
+int interface(int choice)
+{
+    switch (choice)
+    {
+    case 0: // Initial call
+        break;
+    case 1: // School search
+        break;
+    case 2: // School deletion
+        break;
+    case 3: // School display
+        break;
+    case 4: // Quit
+        break;
+    }
+}
+
 int main()
 {
     CSVReader fileReading;
@@ -145,5 +162,7 @@ int main()
         }
     }
 
-    list.display();
+    cout << "ALAN URBANEK" << endl;
+    cout << "CS 210 MIDTERM MILESTONE 2" << endl;
+    cout << "SCHOOL DATABASE" << endl << endl;
 }
