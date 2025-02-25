@@ -130,11 +130,27 @@ public:
     }
 };
 
-int interface(int choice)
+void interface(int choice)
 {
+    int input = -1;
+
+    if (choice < 0 || choice > 4)
+    {
+        cout << "Error: Invalid choice." << endl;
+        interface(0);
+    }
+
     switch (choice)
     {
     case 0: // Initial call
+        cout << "What would you like to do? (Enter number)" << endl;
+        cout << "1. Search for a school by name" << endl;
+        cout << "2. Delete a school by name" << endl;
+        cout << "3. Display stored schools" << endl;
+        cout << "4. Quit" << endl;
+
+        cin >> input;
+        interface(input);
         break;
     case 1: // School search
         break;
@@ -165,4 +181,8 @@ int main()
     cout << "ALAN URBANEK" << endl;
     cout << "CS 210 MIDTERM MILESTONE 2" << endl;
     cout << "SCHOOL DATABASE" << endl << endl;
+
+    interface(0);
+
+    return 0;
 }
