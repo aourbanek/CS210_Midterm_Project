@@ -7,3 +7,5 @@ This repository serves and will serve as a home for all code written by me for t
 Set up a GitHub repository to host code and get familiar with the commit system. You're here on it!
 ### Milestone 2
 Write code to load data (Schools & related info) from a .csv file and interact with it in simple ways: searching, deleting, displaying.
+### Milestone 3
+Extend the previous implementation, using a BST instead of a Linked List.
