@@ -76,53 +76,60 @@ public:
         return node;
     }
 
-    //School* deleteByName(School* node, string name)
-    //{
-    //    if (root == nullptr)
-    //    {
-    //        return root;
-    //    }
+    School* deleteByName(School* node, string name)
+    {
+        if (root == nullptr)
+        {
+            return root;
+        }
 
-    //    // Searching for correct node
-    //    if (name < root->name) // Name "less" than current name?
-    //    {
-    //        root->left = deleteByName(root->left->name, name);
-    //    }
-    //    else if (name > root->name) // Name "greater" than current name?
-    //    {
-    //        root->right = deleteByName(root->right->name, name);
-    //    }
-    //    else // Node with correct name found
-    //    {
-    //        // Case 1: Leaf node
-    //        if (root->left == nullptr && root->right == nullptr)
-    //        {
-    //            delete root;
-    //            return nullptr;
-    //        }
+        // Searching for correct node
+        if (name < root->name) // Name "less" than current name?
+        {
+            root->left = deleteByName(root->left->name, name);
+        }
+        else if (name > root->name) // Name "greater" than current name?
+        {
+            root->right = deleteByName(root->right->name, name);
+        }
+        else // Node with correct name found
+        {
+            // Case 1: Leaf node
+            if (root->left == nullptr && root->right == nullptr)
+            {
+                delete root;
+                return nullptr;
+            }
 
-    //        // Case 2: 1 child (if one child is null, return the other)
-    //        else if (root->left == nullptr)
-    //        {
-    //            School* temp = root->right;
-    //            delete root;
-    //            return temp;
-    //        }
-    //        else if (root->right == nullptr)
-    //        {
-    //            School* temp = root->left;
-    //            delete root;
-    //            return temp;
-    //        }
+            // Case 2: 1 child (if one child is null, return the other)
+            else if (root->left == nullptr)
+            {
+                School* temp = root->right;
+                delete root;
+                return temp;
+            }
+            else if (root->right == nullptr)
+            {
+                School* temp = root->left;
+                delete root;
+                return temp;
+            }
 
-    //        // Case 3: 2 children
-    //        else
-    //        {
-    //            School* temp = replacementNode(root->right);
+            // Case 3: 2 children
+            else
+            {
+                School* temp = replacementNode(root->right);
 
-    //        }
-    //    }
-    //}
+                root->name = temp->name;
+                root->address = temp->address;
+                root->city = temp->city;
+                root->state = temp->state;
+                root->county = temp->county;
+                
+                root->right = deleteByName(root->right, temp->name);
+            }
+        }
+    }
 
     void findByName(string name)
     {
