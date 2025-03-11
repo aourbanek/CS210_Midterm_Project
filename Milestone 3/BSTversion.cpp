@@ -64,7 +64,6 @@ public:
     }
 
     School* insert(School* node, string name, string address, string city, string state, string county) {
-        cout << "inserting " << name << endl;
         if (node == nullptr)
         {
             return new School(name, address, city, state, county);
@@ -74,7 +73,7 @@ public:
         {
             node->left = insert(node->left, name, address, city, state, county);
         }
-        else
+        else if (name > node->name)
         {
             node->right = insert(node->right, name, address, city, state, county);
         }
@@ -179,8 +178,6 @@ public:
             displayPreOrder(node->right);
         }
 
-        cout << endl;
-
         return;
     }
 
@@ -193,8 +190,6 @@ public:
             displayInOrder(node->right);
         }
 
-        cout << endl;
-
         return;
     }
 
@@ -206,8 +201,6 @@ public:
             displayPostOrder(node->right);
             cout << node->name << endl;
         }
-
-        cout << endl;
 
         return;
     }
