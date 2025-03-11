@@ -89,49 +89,55 @@ public:
         }
 
         // Searching for correct node
-        if (name < root->name) // Name "less" than current name?
+        if (node->name < name) // Name "less" than current name?
         {
-            root->left = deleteByName(root->left, name);
+            cout << "searching left" << endl;
+            node->left = deleteByName(node->left, name);
         }
-        else if (name > root->name) // Name "greater" than current name?
+        else if (node->name > name) // Name "greater" than current name?
         {
-            root->right = deleteByName(root->right, name);
+            cout << "searching right" << endl;
+            node->right = deleteByName(root->right, name);
         }
         else // Node with correct name found
         {
             // Case 1: Leaf node
-            if (root->left == nullptr && root->right == nullptr)
+            if (node->left == nullptr && node->right == nullptr)
             {
-                delete root;
+                cout << "case 1?" << endl;
+                delete node;
                 return nullptr;
             }
 
             // Case 2: 1 child (if one child is null, return the other)
-            else if (root->left == nullptr)
+            else if (node->left == nullptr)
             {
-                School* temp = root->right;
-                delete root;
+                cout << "case 2 right?" << endl;
+                School* temp = node->right;
+                delete node;
                 return temp;
             }
             else if (root->right == nullptr)
             {
-                School* temp = root->left;
-                delete root;
+                cout << "case 2 left?" << endl;
+                School* temp = node->left;
+                delete node;
                 return temp;
             }
 
             // Case 3: 2 children
             else
             {
-                School* temp = replacementNode(root->right);
+                cout << "case 3 double?" << endl;
+                School* temp = replacementNode(node->right);
 
-                root->name = temp->name;
-                root->address = temp->address;
-                root->city = temp->city;
-                root->state = temp->state;
-                root->county = temp->county;
+                node->name = temp->name;
+                node->address = temp->address;
+                node->city = temp->city;
+                node->state = temp->state;
+                node->county = temp->county;
 
-                root->right = deleteByName(root->right, temp->name);
+                node->right = deleteByName(node->right, temp->name);
             }
         }
 
