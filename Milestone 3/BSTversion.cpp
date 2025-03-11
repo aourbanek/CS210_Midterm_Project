@@ -64,6 +64,7 @@ public:
     }
 
     School* insert(School* node, string name, string address, string city, string state, string county) {
+        cout << "inserting " << name << endl;
         if (node == nullptr)
         {
             return new School(name, address, city, state, county);
@@ -71,12 +72,10 @@ public:
 
         if (name < node->name)
         {
-            cout << "inserting " << name << " left" << endl;
             node->left = insert(node->left, name, address, city, state, county);
         }
         else
         {
-            cout << "inserting " << name << " right" << endl;
             node->right = insert(node->right, name, address, city, state, county);
         }
 
@@ -85,9 +84,9 @@ public:
 
     School* deleteByName(School* node, string name)
     {
-        if (root == nullptr)
+        if (node == nullptr)
         {
-            return root;
+            return node;
         }
 
         // Searching for correct node
@@ -146,11 +145,11 @@ public:
 
         while (current && current->name != name)
         {
-            if (current->name < name)
+            if (name < current->name)
             {
                 current = current->left;
             }
-            else if (current->name > name)
+            else
             {
                 current = current->right;
             }
@@ -173,7 +172,7 @@ public:
 
     void displayPreOrder(School* node)
     {
-        while (node != nullptr)
+        if (node != nullptr)
         {
             cout << node->name << endl;
             displayPreOrder(node->left);
@@ -187,7 +186,7 @@ public:
 
     void displayInOrder(School* node)
     {
-        while (node != nullptr)
+        if (node != nullptr)
         {
             displayInOrder(node->left);
             cout << node->name << endl;
@@ -201,7 +200,7 @@ public:
 
     void displayPostOrder(School* node)
     {
-        while (node != nullptr)
+        if (node != nullptr)
         {
             displayPostOrder(node->left);
             displayPostOrder(node->right);
@@ -244,7 +243,7 @@ public:
     }
 };
 
-void interface(int choice, SchoolTree tree)
+void interface(int choice, SchoolTree& tree)
 {
     int input = -1;
     char doMore = ' ';
