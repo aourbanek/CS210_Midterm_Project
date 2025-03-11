@@ -11,16 +11,17 @@ struct School
     string city;
     string state;
     string county;
-    School* next;
-    School(string val1, string val2, string val3, string val4, string val5) : name(val1), address(val2), city(val3), state(val4), county(val5), next(nullptr) {}
+    School* left;
+    School* right;
+    School(string val1, string val2, string val3, string val4, string val5) : name(val1), address(val2), city(val3), state(val4), county(val5), left(nullptr), right(nullptr) {}
 };
 
 class SchoolList
 {
-    School* head;
+    School* root;
 
 public:
-    SchoolList() : head(nullptr) {}
+    SchoolList() : root(nullptr) {}
 
     void insertFirst(string name, string address, string city, string state, string county)
     {
@@ -56,67 +57,67 @@ public:
 
         return;
     }
-    void deleteByName(string name)
-    {
-        School* current = head;
-        School* prev = nullptr;
+    //void deleteByName(string name)
+    //{
+    //    School* current = head;
+    //    School* prev = nullptr;
 
-        while (current && current->name != name)
-        {
-            prev = current;
-            current = current->next;
-        }
+    //    while (current && current->name != name)
+    //    {
+    //        prev = current;
+    //        current = current->next;
+    //    }
 
-        if (!current)
-        {
-            cout << "Error: School not found." << endl << endl;
-            return;
-        }
+    //    if (!current)
+    //    {
+    //        cout << "Error: School not found." << endl << endl;
+    //        return;
+    //    }
 
-        prev->next = current->next;
-        delete current;
+    //    prev->next = current->next;
+    //    delete current;
 
-        cout << "School deleted." << endl << endl;
+    //    cout << "School deleted." << endl << endl;
 
-        return
-    }
-    void findByName(string name)
-    {
-        School* current = head;
+    //    return
+    //}
+    //void findByName(string name)
+    //{
+    //    School* current = head;
 
-        while (current && current->name != name)
-        {
-            current = current->next;
-        }
+    //    while (current && current->name != name)
+    //    {
+    //        current = current->next;
+    //    }
 
-        if (!current)
-        {
-            cout << "Error: School not found." << endl;
-            return;
-        }
+    //    if (!current)
+    //    {
+    //        cout << "Error: School not found." << endl;
+    //        return;
+    //    }
 
-        cout << "School found: " << current->name << endl;
-        cout << "Address: " << current->address << endl;
-        cout << "City   : " << current->city << endl;
-        cout << "State  : " << current->state << endl;
-        cout << "County : " << current->county << endl << endl;
+    //    cout << "School found: " << current->name << endl;
+    //    cout << "Address: " << current->address << endl;
+    //    cout << "City   : " << current->city << endl;
+    //    cout << "State  : " << current->state << endl;
+    //    cout << "County : " << current->county << endl << endl;
 
-        return;
-    }
-    void display()
-    {
-        School* temp = head;
-        cout << "List of Schools:" << endl;
-        while (temp != nullptr)
-        {
-            cout << temp->name << endl;
-            temp = temp->next;
-        }
+    //    return;
+    //}
+    //void display()
+    //{
+    //    School* temp = head;
+    //    cout << "List of Schools:" << endl;
+    //    while (temp != nullptr)
+    //    {
+    //        cout << temp->name << endl;
+    //        temp = temp->next;
+    //    }
 
-        cout << endl;
+    //    cout << endl;
 
-        return;
-    }
+    //    return;
+    //}
 };
 
 class CSVReader {
