@@ -58,6 +58,11 @@ private:
 public:
     SchoolTree() : root(nullptr) {}
 
+    void insertPublic(string name, string address, string city, string state, string county)
+    {
+        root = insert(root, name, address, city, state, county);
+    }
+
     School* insert(School* node, string name, string address, string city, string state, string county) {
         if (node == nullptr)
         {
@@ -125,7 +130,7 @@ public:
                 root->city = temp->city;
                 root->state = temp->state;
                 root->county = temp->county;
-                
+
                 root->right = deleteByName(root->right, temp->name);
             }
         }
@@ -154,7 +159,7 @@ public:
             cout << "Error: School not found." << endl;
             return;
         }
-    
+
         cout << "School found: " << current->name << endl;
         cout << "Address: " << current->address << endl;
         cout << "City   : " << current->city << endl;
@@ -292,7 +297,7 @@ void interface(int choice, SchoolTree tree)
         cout << "Enter the name of a school (in all caps):" << endl;
         std::getline(std::cin >> std::ws, searchKey);
         tree.deleteByName(tree.getRoot(), searchKey);
-        
+
         cout << "Would you like to do more? (y/n)" << endl;
         cin >> doMore;
         switch (doMore)
@@ -368,7 +373,7 @@ int main()
     {
         if (item != data[0]) // Skips first line of data labels
         {
-            tree.insert(item[0], item[1], item[2], item[3], item[4]);
+            tree.insertPublic(item[0], item[1], item[2], item[3], item[4]);
         }
     }
 
