@@ -71,10 +71,12 @@ public:
 
         if (name < node->name)
         {
+            cout << "inserting " << name << " left" << endl;
             node->left = insert(node->left, name, address, city, state, county);
         }
         else
         {
+            cout << "inserting " << name << " right" << endl;
             node->right = insert(node->right, name, address, city, state, county);
         }
 
@@ -375,7 +377,7 @@ int main()
     }
 
     cout << "ALAN URBANEK" << endl;
-    cout << "CS 210 MIDTERM MILESTONE 2" << endl;
+    cout << "CS 210 MIDTERM MILESTONE 3" << endl;
     cout << "SCHOOL DATABASE" << endl << endl;
 
     interface(0, tree);
