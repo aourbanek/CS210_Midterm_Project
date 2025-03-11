@@ -171,13 +171,11 @@ public:
 
     void displayPreOrder(School* node)
     {
-        School* temp = root;
-        cout << "List of Schools (Pre-Order):" << endl;
-        while (temp != nullptr)
+        while (node != nullptr)
         {
-            cout << temp->name << endl;
-            displayPreOrder(temp->left);
-            displayPreOrder(temp->right);
+            cout << node->name << endl;
+            displayPreOrder(node->left);
+            displayPreOrder(node->right);
         }
 
         cout << endl;
@@ -187,13 +185,11 @@ public:
 
     void displayInOrder(School* node)
     {
-        School* temp = root;
-        cout << "List of Schools (In-Order):" << endl;
-        while (temp != nullptr)
+        while (node != nullptr)
         {
-            displayPreOrder(temp->left);
-            cout << temp->name << endl;
-            displayPreOrder(temp->right);
+            displayInOrder(node->left);
+            cout << node->name << endl;
+            displayInOrder(node->right);
         }
 
         cout << endl;
@@ -203,13 +199,11 @@ public:
 
     void displayPostOrder(School* node)
     {
-        School* temp = root;
-        cout << "List of Schools (In-Order):" << endl;
-        while (temp != nullptr)
+        while (node != nullptr)
         {
-            displayPreOrder(temp->left);
-            displayPreOrder(temp->right);
-            cout << temp->name << endl;
+            displayPostOrder(node->left);
+            displayPostOrder(node->right);
+            cout << node->name << endl;
         }
 
         cout << endl;
@@ -311,6 +305,7 @@ void interface(int choice, SchoolTree tree)
         }
         break;
     case 3: // School display (pre-order)
+        cout << "List of Schools (Pre-Order):" << endl;
         tree.displayPreOrder(tree.getRoot());
 
         cout << "Would you like to do more? (y/n)" << endl;
@@ -326,6 +321,7 @@ void interface(int choice, SchoolTree tree)
         }
         break;
     case 4: // School display (in-order)
+        cout << "List of Schools (In-Order):" << endl;
         tree.displayInOrder(tree.getRoot());
 
         cout << "Would you like to do more? (y/n)" << endl;
@@ -341,6 +337,7 @@ void interface(int choice, SchoolTree tree)
         }
         break;
     case 5: // School display (post-order)
+        cout << "List of Schools (Post-Order):" << endl;
         tree.displayPostOrder(tree.getRoot());
 
         cout << "Would you like to do more? (y/n)" << endl;
