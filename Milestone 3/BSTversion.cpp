@@ -155,20 +155,53 @@ public:
         return;
     }
 
-    //void display()
-    //{
-    //    School* temp = head;
-    //    cout << "List of Schools:" << endl;
-    //    while (temp != nullptr)
-    //    {
-    //        cout << temp->name << endl;
-    //        temp = temp->next;
-    //    }
+    void displayPreOrder()
+    {
+        School* temp = head;
+        cout << "List of Schools (Pre-Order):" << endl;
+        while (temp != nullptr)
+        {
+            cout << temp->name << endl;
+            displayPreOrder(temp->left);
+            displayPreOrder(temp->right);
+        }
 
-    //    cout << endl;
+        cout << endl;
 
-    //    return;
-    //}
+        return;
+    }
+
+    void displayInOrder()
+    {
+        School* temp = head;
+        cout << "List of Schools (In-Order):" << endl;
+        while (temp != nullptr)
+        {
+            displayPreOrder(temp->left);
+            cout << temp->name << endl;
+            displayPreOrder(temp->right);
+        }
+
+        cout << endl;
+
+        return;
+    }
+
+    void displayPostOrder()
+    {
+        School* temp = head;
+        cout << "List of Schools (In-Order):" << endl;
+        while (temp != nullptr)
+        {
+            displayPreOrder(temp->left);
+            displayPreOrder(temp->right);
+            cout << temp->name << endl;
+        }
+
+        cout << endl;
+
+        return;
+    }
 };
 
 class CSVReader {
@@ -202,7 +235,7 @@ void interface(int choice, SchoolTree tree)
     char doMore = ' ';
     string searchKey = "";
 
-    if (choice < 0 || choice > 4)
+    if (choice < 0 || choice > 6)
     {
         cout << "Error: Invalid choice." << endl;
         interface(0, tree);
@@ -214,8 +247,10 @@ void interface(int choice, SchoolTree tree)
         cout << "What would you like to do? (Enter number)" << endl;
         cout << "1. Search for a school by name" << endl;
         cout << "2. Delete a school by name" << endl;
-        cout << "3. Display stored schools" << endl;
-        cout << "4. Quit" << endl;
+        cout << "3. Display stored schools (pre-order)" << endl;
+        cout << "4. Display stored schools (in-order)" << endl;
+        cout << "5. Display stored schools (post-order)" << endl;
+        cout << "6. Quit" << endl;
 
         cin >> input;
         interface(input, tree);
@@ -235,7 +270,7 @@ void interface(int choice, SchoolTree tree)
             interface(0, tree);
             break;
         case 'n':
-            interface(4, tree);
+            interface(6, tree);
             break;
         }
         break;
@@ -252,12 +287,12 @@ void interface(int choice, SchoolTree tree)
             interface(0, tree);
             break;
         case 'n':
-            interface(4, tree);
+            interface(6, tree);
             break;
         }
         break;
-    case 3: // School display
-        tree.display();
+    case 3: // School display (pre-order)
+        tree.displayPreOrder();
 
         cout << "Would you like to do more? (y/n)" << endl;
         cin >> doMore;
@@ -267,11 +302,41 @@ void interface(int choice, SchoolTree tree)
             interface(0, tree);
             break;
         case 'n':
-            interface(4, tree);
+            interface(6, tree);
             break;
         }
         break;
-    case 4: // Quit
+    case 4: // School display (in-order)
+        tree.displayInOrder();
+
+        cout << "Would you like to do more? (y/n)" << endl;
+        cin >> doMore;
+        switch (doMore)
+        {
+        case 'y':
+            interface(0, tree);
+            break;
+        case 'n':
+            interface(6, tree);
+            break;
+        }
+        break;
+    case 5: // School display (post-order)
+        tree.displayPostOrder();
+
+        cout << "Would you like to do more? (y/n)" << endl;
+        cin >> doMore;
+        switch (doMore)
+        {
+        case 'y':
+            interface(0, tree);
+            break;
+        case 'n':
+            interface(6, tree);
+            break;
+        }
+        break;
+    case 6: // Quit
         cout << "Ok. Goodbye!";
         return;
         break;
