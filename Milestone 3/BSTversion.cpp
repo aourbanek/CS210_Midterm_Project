@@ -211,6 +211,11 @@ public:
 
         return;
     }
+
+    School* getRoot()
+    {
+        return root;
+    }
 };
 
 class CSVReader {
@@ -286,8 +291,8 @@ void interface(int choice, SchoolTree tree)
     case 2: // School deletion
         cout << "Enter the name of a school (in all caps):" << endl;
         std::getline(std::cin >> std::ws, searchKey);
-        tree.deleteByName(searchKey);
-
+        tree.deleteByName(tree.getRoot(), searchKey);
+        
         cout << "Would you like to do more? (y/n)" << endl;
         cin >> doMore;
         switch (doMore)
@@ -301,7 +306,7 @@ void interface(int choice, SchoolTree tree)
         }
         break;
     case 3: // School display (pre-order)
-        tree.displayPreOrder();
+        tree.displayPreOrder(tree.getRoot());
 
         cout << "Would you like to do more? (y/n)" << endl;
         cin >> doMore;
@@ -316,7 +321,7 @@ void interface(int choice, SchoolTree tree)
         }
         break;
     case 4: // School display (in-order)
-        tree.displayInOrder();
+        tree.displayInOrder(tree.getRoot());
 
         cout << "Would you like to do more? (y/n)" << endl;
         cin >> doMore;
@@ -331,7 +336,7 @@ void interface(int choice, SchoolTree tree)
         }
         break;
     case 5: // School display (post-order)
-        tree.displayPostOrder();
+        tree.displayPostOrder(tree.getRoot());
 
         cout << "Would you like to do more? (y/n)" << endl;
         cin >> doMore;
