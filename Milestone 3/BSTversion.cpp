@@ -21,40 +21,8 @@ class SchoolTree
     School* root;
 
 private:
-    // Implementation of similar function from CS 102
-    // (For node deletion)
     School* replacementNode(School* node)
     {
-        //if (node->left == nullptr && node->right == nullptr)
-        //{
-        //    return nullptr;
-        //}
-        //else if (node->left != nullptr && node->right == nullptr)
-        //{
-        //    return node->left;
-        //}
-        //else if (node->left == nullptr && node->right != nullptr)
-        //{
-        //    return node->right;
-        //}
-
-        //School* parent = node;
-        //School* current = node->right;
-        //while (current->left != nullptr)
-        //{
-        //    parent = current;
-        //    current = current->left;
-        //}
-
-        //current->left = node->left;
-        //if (node->right != current)
-        //{
-        //    parent->left = current->right;
-        //    current->right = node->right;
-        //}
-
-        //return current;
-
         node = node->right;
         while (node != nullptr && node->left != nullptr)
         {
@@ -98,20 +66,17 @@ public:
         // Searching for correct node
         if (node->name > name) // Name "less" than current name?
         {
-            cout << "searching left" << endl;
             node->left = deleteByName(node->left, name);
         }
         else if (node->name < name) // Name "greater" than current name?
         {
-            cout << "searching right" << endl;
-            node->right = deleteByName(root->right, name);
+            node->right = deleteByName(node->right, name);
         }
         else // Node with correct name found
         {
             // Case 1: Leaf node
             if (node->left == nullptr)
             {
-                cout << "case 1?" << endl;
                 School* temp = node->right;
                 delete node;
                 return temp;
@@ -120,14 +85,12 @@ public:
             // Case 2: 1 child (if one child is null, return the other)
             if (node->right == nullptr)
             {
-                cout << "case 2 right?" << endl;
                 School* temp = node->left;
                 delete node;
                 return temp;
             }
 
             // Case 3: 2 children
-            cout << "case 3 double?" << endl;
             School* replacement = replacementNode(node);
 
             node->name = replacement->name;
