@@ -86,11 +86,11 @@ public:
         // Searching for correct node
         if (name < root->name) // Name "less" than current name?
         {
-            root->left = deleteByName(root->left->name, name);
+            root->left = deleteByName(root->left, name);
         }
         else if (name > root->name) // Name "greater" than current name?
         {
-            root->right = deleteByName(root->right->name, name);
+            root->right = deleteByName(root->right, name);
         }
         else // Node with correct name found
         {
@@ -129,6 +129,8 @@ public:
                 root->right = deleteByName(root->right, temp->name);
             }
         }
+
+        return node;
     }
 
     void findByName(string name)
@@ -162,9 +164,9 @@ public:
         return;
     }
 
-    void displayPreOrder()
+    void displayPreOrder(School* node)
     {
-        School* temp = head;
+        School* temp = root;
         cout << "List of Schools (Pre-Order):" << endl;
         while (temp != nullptr)
         {
@@ -178,9 +180,9 @@ public:
         return;
     }
 
-    void displayInOrder()
+    void displayInOrder(School* node)
     {
-        School* temp = head;
+        School* temp = root;
         cout << "List of Schools (In-Order):" << endl;
         while (temp != nullptr)
         {
@@ -194,9 +196,9 @@ public:
         return;
     }
 
-    void displayPostOrder()
+    void displayPostOrder(School* node)
     {
-        School* temp = head;
+        School* temp = root;
         cout << "List of Schools (In-Order):" << endl;
         while (temp != nullptr)
         {
