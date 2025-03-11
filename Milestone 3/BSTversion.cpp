@@ -76,91 +76,84 @@ public:
         return node;
     }
 
-    School* deleteByName(School* node, string name)
-    {
-        if (root == nullptr)
-        {
-            return root;
-        }
-
-        // Searching for correct node
-        if (name < root->name) // Name "less" than current name?
-        {
-            root->left = deleteByName(root->left->name, name);
-        }
-        else if (name > root->name) // Name "greater" than current name?
-        {
-            root->right = deleteByName(root->right->name, name);
-        }
-        else // Node with correct name found
-        {
-            // Case 1: Leaf node
-            if (root->left == nullptr && root->right == nullptr)
-            {
-                delete root;
-                return nullptr;
-            }
-
-            // Case 2: 1 child (if one child is null, return the other)
-            else if (root->left == nullptr)
-            {
-                School* temp = root->right;
-                delete root;
-                return temp;
-            }
-            else if (root->right == nullptr)
-            {
-                School* temp = root->left;
-                delete root;
-                return temp;
-            }
-
-            // Case 3: 2 children
-        }
-
-        //while (current && current->name != name)
-        //{
-        //    prev = current;
-        //    current = current->next;
-        //}
-
-        //if (!current)
-        //{
-        //    cout << "Error: School not found." << endl << endl;
-        //    return;
-        //}
-
-        //prev->next = current->next;
-        //delete current;
-
-        //cout << "School deleted." << endl << endl;
-
-        //return
-    }
-
-    //void findByName(string name)
+    //School* deleteByName(School* node, string name)
     //{
-    //    School* current = head;
-
-    //    while (current && current->name != name)
+    //    if (root == nullptr)
     //    {
-    //        current = current->next;
+    //        return root;
     //    }
 
-    //    if (!current)
+    //    // Searching for correct node
+    //    if (name < root->name) // Name "less" than current name?
     //    {
-    //        cout << "Error: School not found." << endl;
-    //        return;
+    //        root->left = deleteByName(root->left->name, name);
     //    }
+    //    else if (name > root->name) // Name "greater" than current name?
+    //    {
+    //        root->right = deleteByName(root->right->name, name);
+    //    }
+    //    else // Node with correct name found
+    //    {
+    //        // Case 1: Leaf node
+    //        if (root->left == nullptr && root->right == nullptr)
+    //        {
+    //            delete root;
+    //            return nullptr;
+    //        }
 
-    //    cout << "School found: " << current->name << endl;
-    //    cout << "Address: " << current->address << endl;
-    //    cout << "City   : " << current->city << endl;
-    //    cout << "State  : " << current->state << endl;
-    //    cout << "County : " << current->county << endl << endl;
+    //        // Case 2: 1 child (if one child is null, return the other)
+    //        else if (root->left == nullptr)
+    //        {
+    //            School* temp = root->right;
+    //            delete root;
+    //            return temp;
+    //        }
+    //        else if (root->right == nullptr)
+    //        {
+    //            School* temp = root->left;
+    //            delete root;
+    //            return temp;
+    //        }
 
-    //    return;
+    //        // Case 3: 2 children
+    //        else
+    //        {
+    //            School* temp = replacementNode(root->right);
+
+    //        }
+    //    }
     //}
+
+    void findByName(string name)
+    {
+        School* current = root;
+
+        while (current && current->name != name)
+        {
+            if (current->name < name)
+            {
+                current = current->left;
+            }
+            else if (current->name > name)
+            {
+                current = current->right;
+            }
+        }
+
+        if (!current)
+        {
+            cout << "Error: School not found." << endl;
+            return;
+        }
+    
+        cout << "School found: " << current->name << endl;
+        cout << "Address: " << current->address << endl;
+        cout << "City   : " << current->city << endl;
+        cout << "State  : " << current->state << endl;
+        cout << "County : " << current->county << endl << endl;
+
+        return;
+    }
 
     //void display()
     //{
