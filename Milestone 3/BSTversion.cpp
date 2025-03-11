@@ -40,30 +40,32 @@ public:
 
         return node;
     }
-    //void deleteByName(string name)
-    //{
-    //    School* current = head;
-    //    School* prev = nullptr;
 
-    //    while (current && current->name != name)
-    //    {
-    //        prev = current;
-    //        current = current->next;
-    //    }
+    void deleteByName(string name)
+    {
+        School* current = head;
+        School* prev = nullptr;
 
-    //    if (!current)
-    //    {
-    //        cout << "Error: School not found." << endl << endl;
-    //        return;
-    //    }
+        while (current && current->name != name)
+        {
+            prev = current;
+            current = current->next;
+        }
 
-    //    prev->next = current->next;
-    //    delete current;
+        if (!current)
+        {
+            cout << "Error: School not found." << endl << endl;
+            return;
+        }
 
-    //    cout << "School deleted." << endl << endl;
+        prev->next = current->next;
+        delete current;
 
-    //    return
-    //}
+        cout << "School deleted." << endl << endl;
+
+        return
+    }
+
     //void findByName(string name)
     //{
     //    School* current = head;
@@ -87,6 +89,7 @@ public:
 
     //    return;
     //}
+
     //void display()
     //{
     //    School* temp = head;
