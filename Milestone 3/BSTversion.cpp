@@ -16,46 +16,29 @@ struct School
     School(string val1, string val2, string val3, string val4, string val5) : name(val1), address(val2), city(val3), state(val4), county(val5), left(nullptr), right(nullptr) {}
 };
 
-class SchoolList
+class SchoolTree
 {
     School* root;
 
 public:
-    SchoolList() : root(nullptr) {}
+    SchoolTree() : root(nullptr) {}
 
-    void insertFirst(string name, string address, string city, string state, string county)
-    {
-        School* newSchool = new School(name, address, city, state, county);
-        if (head == nullptr)
+    School* insert(School* node, string name, string address, string city, string state, string county) {
+        if (node == nullptr)
         {
-            head = newSchool;
+            return new School(name, address, city, state, county);
+        }
+
+        if (name < node->name)
+        {
+            node->left = insert(node->left, name, address, city, state, county);
         }
         else
         {
-            newSchool->next = head;
-            head = newSchool;
+            node->right = insert(node->right, name, address, city, state, county);
         }
 
-        return;
-    }
-    void insertLast(string name, string address, string city, string state, string county)
-    {
-        School* newSchool = new School(name, address, city, state, county);
-        if (head == nullptr)
-        {
-            head = newSchool;
-        }
-        else
-        {
-            School* temp = head;
-            while (temp->next != nullptr)
-            {
-                temp = temp->next;
-            }
-            temp->next = newSchool;
-        }
-
-        return;
+        return node;
     }
     //void deleteByName(string name)
     //{
@@ -145,7 +128,7 @@ public:
     }
 };
 
-void interface(int choice, SchoolList list)
+void interface(int choice, SchoolTree tree)
 {
     int input = -1;
     char doMore = ' ';
@@ -154,7 +137,7 @@ void interface(int choice, SchoolList list)
     if (choice < 0 || choice > 4)
     {
         cout << "Error: Invalid choice." << endl;
-        interface(0, list);
+        interface(0, tree);
     }
 
     switch (choice)
@@ -167,56 +150,56 @@ void interface(int choice, SchoolList list)
         cout << "4. Quit" << endl;
 
         cin >> input;
-        interface(input, list);
+        interface(input, tree);
         break;
     case 1: // School search
         cout << "Enter the name of a school (in all caps):" << endl;
         // This getline() took many attempts to properly include whitespaces;
         // solution found @ https://www.reddit.com/r/cpp_questions/comments/15n91xf/how_do_i_store_user_input_with_spaces_in_a_string/
         std::getline(std::cin >> std::ws, searchKey);
-        list.findByName(searchKey);
+        tree.findByName(searchKey);
 
         cout << "Would you like to do more? (y/n)" << endl;
         cin >> doMore;
         switch (doMore)
         {
         case 'y':
-            interface(0, list);
+            interface(0, tree);
             break;
         case 'n':
-            interface(4, list);
+            interface(4, tree);
             break;
         }
         break;
     case 2: // School deletion
         cout << "Enter the name of a school (in all caps):" << endl;
         std::getline(std::cin >> std::ws, searchKey);
-        list.deleteByName(searchKey);
+        tree.deleteByName(searchKey);
 
         cout << "Would you like to do more? (y/n)" << endl;
         cin >> doMore;
         switch (doMore)
         {
         case 'y':
-            interface(0, list);
+            interface(0, tree);
             break;
         case 'n':
-            interface(4, list);
+            interface(4, tree);
             break;
         }
         break;
     case 3: // School display
-        list.display();
+        tree.display();
 
         cout << "Would you like to do more? (y/n)" << endl;
         cin >> doMore;
         switch (doMore)
         {
         case 'y':
-            interface(0, list);
+            interface(0, tree);
             break;
         case 'n':
-            interface(4, list);
+            interface(4, tree);
             break;
         }
         break;
@@ -233,12 +216,12 @@ int main()
     string filename = "Illinois_Schools.csv";
     vector<vector<string>> data = fileReading.readCSV("Illinois_Schools.csv");
 
-    SchoolList list;
+    SchoolTree tree;
     for (vector<string> item : data)
     {
         if (item != data[0]) // Skips first line of data labels
         {
-            list.insertLast(item[0], item[1], item[2], item[3], item[4]);
+            tree.insert(item[0], item[1], item[2], item[3], item[4]);
         }
     }
 
@@ -246,7 +229,7 @@ int main()
     cout << "CS 210 MIDTERM MILESTONE 2" << endl;
     cout << "SCHOOL DATABASE" << endl << endl;
 
-    interface(0, list);
+    interface(0, tree);
 
     return 0;
 }
