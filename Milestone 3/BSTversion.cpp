@@ -20,6 +20,41 @@ class SchoolTree
 {
     School* root;
 
+private:
+    // Implementation of similar function from CS 102
+    // (For node deletion)
+    School* replacementNode(School* node)
+    {
+        if (node->left == nullptr && node->right == nullptr)
+        {
+            return nullptr;
+        }
+        else if (node->left != nullptr && node->right == nullptr)
+        {
+            return node->left;
+        }
+        else if (node->left == nullptr && node->right != nullptr)
+        {
+            return node->right;
+        }
+
+        School* parent = node;
+        School* current = node->right;
+        while (current->left != nullptr)
+        {
+            parent = current;
+            current = current->left;
+        }
+
+        current->left = node->left;
+        if (node->right != current)
+        {
+            parent->left = current->right;
+            current->right = node->right;
+        }
+
+        return current;
+    }
 public:
     SchoolTree() : root(nullptr) {}
 
@@ -41,29 +76,66 @@ public:
         return node;
     }
 
-    void deleteByName(string name)
+    School* deleteByName(School* node, string name)
     {
-        School* current = head;
-        School* prev = nullptr;
-
-        while (current && current->name != name)
+        if (root == nullptr)
         {
-            prev = current;
-            current = current->next;
+            return root;
         }
 
-        if (!current)
+        // Searching for correct node
+        if (name < root->name) // Name "less" than current name?
         {
-            cout << "Error: School not found." << endl << endl;
-            return;
+            root->left = deleteByName(root->left->name, name);
+        }
+        else if (name > root->name) // Name "greater" than current name?
+        {
+            root->right = deleteByName(root->right->name, name);
+        }
+        else // Node with correct name found
+        {
+            // Case 1: Leaf node
+            if (root->left == nullptr && root->right == nullptr)
+            {
+                delete root;
+                return nullptr;
+            }
+
+            // Case 2: 1 child (if one child is null, return the other)
+            else if (root->left == nullptr)
+            {
+                School* temp = root->right;
+                delete root;
+                return temp;
+            }
+            else if (root->right == nullptr)
+            {
+                School* temp = root->left;
+                delete root;
+                return temp;
+            }
+
+            // Case 3: 2 children
         }
 
-        prev->next = current->next;
-        delete current;
+        //while (current && current->name != name)
+        //{
+        //    prev = current;
+        //    current = current->next;
+        //}
 
-        cout << "School deleted." << endl << endl;
+        //if (!current)
+        //{
+        //    cout << "Error: School not found." << endl << endl;
+        //    return;
+        //}
 
-        return
+        //prev->next = current->next;
+        //delete current;
+
+        //cout << "School deleted." << endl << endl;
+
+        //return
     }
 
     //void findByName(string name)
