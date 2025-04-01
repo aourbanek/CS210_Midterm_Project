@@ -11,170 +11,27 @@ struct School
     string city;
     string state;
     string county;
-    School* left;
-    School* right;
-    School(string val1, string val2, string val3, string val4, string val5) : name(val1), address(val2), city(val3), state(val4), county(val5), left(nullptr), right(nullptr) {}
+    School(string val1, string val2, string val3, string val4, string val5) : name(val1), address(val2), city(val3), state(val4), county(val5) {}
 };
 
-class SchoolTree
+class SchoolHashTable
 {
-    School* root;
-
 private:
-    School* replacementNode(School* node)
-    {
-        node = node->right;
-        while (node != nullptr && node->left != nullptr)
-        {
-            node = node->left;
-        }
-        return node;
-    }
+
 public:
-    SchoolTree() : root(nullptr) {}
-
-    void insertPublic(string name, string address, string city, string state, string county)
-    {
-        root = insert(root, name, address, city, state, county);
-    }
-
     School* insert(School* node, string name, string address, string city, string state, string county) {
-        if (node == nullptr)
-        {
-            return new School(name, address, city, state, county);
-        }
-
-        if (name < node->name)
-        {
-            node->left = insert(node->left, name, address, city, state, county);
-        }
-        else if (name > node->name)
-        {
-            node->right = insert(node->right, name, address, city, state, county);
-        }
-
-        return node;
     }
 
     School* deleteByName(School* node, string name)
     {
-        if (node == nullptr)
-        {
-            return node;
-        }
-
-        // Searching for correct node
-        if (node->name > name) // Name "less" than current name?
-        {
-            node->left = deleteByName(node->left, name);
-        }
-        else if (node->name < name) // Name "greater" than current name?
-        {
-            node->right = deleteByName(node->right, name);
-        }
-        else // Node with correct name found
-        {
-            // Case 1: Leaf node
-            if (node->left == nullptr)
-            {
-                School* temp = node->right;
-                delete node;
-                return temp;
-            }
-
-            // Case 2: 1 child (if one child is null, return the other)
-            if (node->right == nullptr)
-            {
-                School* temp = node->left;
-                delete node;
-                return temp;
-            }
-
-            // Case 3: 2 children
-            School* replacement = replacementNode(node);
-
-            node->name = replacement->name;
-            node->address = replacement->address;
-            node->city = replacement->city;
-            node->state = replacement->state;
-            node->county = replacement->county;
-
-            node->right = deleteByName(node->right, replacement->name);
-        }
-
-        return node;
     }
 
     void findByName(string name)
     {
-        School* current = root;
-
-        while (current && current->name != name)
-        {
-            if (name < current->name)
-            {
-                current = current->left;
-            }
-            else
-            {
-                current = current->right;
-            }
-        }
-
-        if (!current)
-        {
-            cout << "Error: School not found." << endl;
-            return;
-        }
-
-        cout << "School found: " << current->name << endl;
-        cout << "Address: " << current->address << endl;
-        cout << "City   : " << current->city << endl;
-        cout << "State  : " << current->state << endl;
-        cout << "County : " << current->county << endl << endl;
-
-        return;
     }
 
-    void displayPreOrder(School* node)
+    void display(School* node)
     {
-        if (node != nullptr)
-        {
-            cout << node->name << endl;
-            displayPreOrder(node->left);
-            displayPreOrder(node->right);
-        }
-
-        return;
-    }
-
-    void displayInOrder(School* node)
-    {
-        if (node != nullptr)
-        {
-            displayInOrder(node->left);
-            cout << node->name << endl;
-            displayInOrder(node->right);
-        }
-
-        return;
-    }
-
-    void displayPostOrder(School* node)
-    {
-        if (node != nullptr)
-        {
-            displayPostOrder(node->left);
-            displayPostOrder(node->right);
-            cout << node->name << endl;
-        }
-
-        return;
-    }
-
-    School* getRoot()
-    {
-        return root;
     }
 };
 
@@ -203,7 +60,7 @@ public:
     }
 };
 
-void interface(int choice, SchoolTree& tree)
+void interface(int choice, SchoolHashTable& tree)
 {
     int input = -1;
     char doMore = ' ';
@@ -221,10 +78,8 @@ void interface(int choice, SchoolTree& tree)
         cout << "What would you like to do? (Enter number)" << endl;
         cout << "1. Search for a school by name" << endl;
         cout << "2. Delete a school by name" << endl;
-        cout << "3. Display stored schools (pre-order)" << endl;
-        cout << "4. Display stored schools (in-order)" << endl;
-        cout << "5. Display stored schools (post-order)" << endl;
-        cout << "6. Quit" << endl;
+        cout << "3. Display stored schools" << endl;
+        cout << "4. Quit" << endl;
 
         cin >> input;
         interface(input, tree);
@@ -266,8 +121,8 @@ void interface(int choice, SchoolTree& tree)
         }
         break;
     case 3: // School display (pre-order)
-        cout << "List of Schools (Pre-Order):" << endl;
-        tree.displayPreOrder(tree.getRoot());
+        cout << "List of Schools:" << endl;
+        tree.display();
 
         cout << "Would you like to do more? (y/n)" << endl;
         cin >> doMore;
@@ -281,39 +136,7 @@ void interface(int choice, SchoolTree& tree)
             break;
         }
         break;
-    case 4: // School display (in-order)
-        cout << "List of Schools (In-Order):" << endl;
-        tree.displayInOrder(tree.getRoot());
-
-        cout << "Would you like to do more? (y/n)" << endl;
-        cin >> doMore;
-        switch (doMore)
-        {
-        case 'y':
-            interface(0, tree);
-            break;
-        case 'n':
-            interface(6, tree);
-            break;
-        }
-        break;
-    case 5: // School display (post-order)
-        cout << "List of Schools (Post-Order):" << endl;
-        tree.displayPostOrder(tree.getRoot());
-
-        cout << "Would you like to do more? (y/n)" << endl;
-        cin >> doMore;
-        switch (doMore)
-        {
-        case 'y':
-            interface(0, tree);
-            break;
-        case 'n':
-            interface(6, tree);
-            break;
-        }
-        break;
-    case 6: // Quit
+    case 4: // Quit
         cout << "Ok. Goodbye!";
         return;
         break;
