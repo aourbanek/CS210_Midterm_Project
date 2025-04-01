@@ -40,6 +40,7 @@ public:
         table.resize(size);
     }
 
+    // TODO: Allow duplicate names
     void insert(const School& school)
     {
         int key = hashFunction(school.name, size);
