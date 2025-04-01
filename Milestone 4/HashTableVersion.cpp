@@ -48,7 +48,7 @@ public:
         }
 
         table[key].push_back(school);
-        cout << "School " << school.name << " successfully insered into hash table." << endl;
+        cout << "School " << school.name << " successfully inserted into hash table." << endl;
     }
 
     void deleteByName(const string& name)
@@ -70,8 +70,20 @@ public:
         return;
     }
 
-    void findByName(string name)
+    School* findByName(const string& name)
     {
+        int key = hashFunction(name, size);
+        for (School& school : table[key])
+        {
+            if (school.name == name)
+            {
+                cout << "School " << name << " found." << endl;
+                return &school;
+            }
+        }
+
+        cout << "School " << name << " not found in hash table." << endl;
+        return nullptr;
     }
 
     void display(School* node)
