@@ -35,12 +35,23 @@ public:
         table.resize(size);
     }
 
-    void insert(School* node, string name, string address, string city, string state, string county)
+    void insert(const School& school)
     {
+        int key = hashFunction(school.name, size);
+        for (const School& existingSchool : table[key])
+        {
+            if (existingSchool.name == school.name)
+            {
+                cout << "Error: School " << school.name << " is already in the hash table." << endl;
+                return;
+            }
+        }
 
+        table[key].push_back(school);
+        cout << "School " << school.name << " successfully insered into hash table." << endl;
     }
 
-    School* deleteByName(School* node, string name)
+    School* deleteByName(string name)
     {
     }
 
