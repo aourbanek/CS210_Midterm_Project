@@ -51,8 +51,23 @@ public:
         cout << "School " << school.name << " successfully insered into hash table." << endl;
     }
 
-    School* deleteByName(string name)
+    void deleteByName(const string& name)
     {
+        int key = hashFunction(name, size);
+        auto& bucket = table[key];
+
+        for (auto it = bucket.begin(); it != bucket.end(); ++it)
+        {
+            if (it->name == name)
+            {
+                bucket.erase(it);
+                cout << "School " << name << " successfully deleted from hash table." << endl;
+                return;
+            }
+        }
+
+        cout << "School " << name << " not found in hash table." << endl;
+        return;
     }
 
     void findByName(string name)
