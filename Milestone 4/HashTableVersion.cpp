@@ -17,9 +17,27 @@ struct School
 class SchoolHashTable
 {
 private:
+    // Hash Table initialization
+    vector<vector<School>> table;
+    int size;
+
+    int hashFunction(string key, int tableSize) {
+        int hash = 0;
+        for (char ch : key) {
+            hash += ch;
+        }
+        return hash % tableSize;
+    }
 
 public:
-    School* insert(School* node, string name, string address, string city, string state, string county) {
+    SchoolHashTable(int size = 10) : size(size)
+    {
+        table.resize(size);
+    }
+
+    void insert(School* node, string name, string address, string city, string state, string county)
+    {
+
     }
 
     School* deleteByName(School* node, string name)
