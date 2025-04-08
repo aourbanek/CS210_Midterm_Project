@@ -12,4 +12,4 @@ Extend the previous implementation, using a BST instead of a Linked List to load
 ### Milestone 4
 Extend Milestone 2 again, using a Hash Table instead of a BST.
 ### Milestone 5
-Implement timing and larger datasets within all three implementations to compare their performance.
+Implement timing (using C++'s <chrono> library) and larger datasets within all three implementations to compare their performance.
