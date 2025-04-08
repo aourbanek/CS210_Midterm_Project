@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <chrono>
 using namespace std;
 
 struct School
@@ -43,6 +44,8 @@ public:
     // TODO: Allow duplicate names
     void insert(const School& school)
     {
+        auto start_hashInsert = chrono::high_resolution_clock::now();
+
         int key = hashFunction(school.name, size);
         for (const School& existingSchool : table[key])
         {
@@ -54,11 +57,14 @@ public:
         }
 
         table[key].push_back(school);
-        cout << "School " << school.name << " successfully inserted into hash table." << endl;
+        auto end_hashInsert = chrono::high_resolution_clock::now();
+        auto time_hashInsert = chrono::duration<double, micro>(end_hashInsert - start_hashInsert).count();
+        cout << "Item inserted in " << time_hashInsert << "us." << endl;
     }
 
     void deleteByName(const string& name)
     {
+        auto start_hashDelete = chrono::high_resolution_clock::now();
         int key = hashFunction(name, size);
         auto& bucket = table[key];
 
@@ -67,7 +73,10 @@ public:
             if (it->name == name)
             {
                 bucket.erase(it);
-                cout << "School " << name << " successfully deleted from hash table." << endl;
+                auto end_hashDelete = chrono::high_resolution_clock::now();
+                auto time_hashDelete = chrono::duration<double, micro>(end_hashDelete - start_hashDelete).count();
+
+                cout << "Item deleted in " << time_hashDelete << "us." << endl << endl;
                 return;
             }
         }
@@ -78,11 +87,17 @@ public:
 
     void findByName(const string& name)
     {
+        auto start_hashSearch = chrono::high_resolution_clock::now();
+
         int key = hashFunction(name, size);
         for (School& school : table[key])
         {
             if (school.name == name)
             {
+                auto end_hashSearch = chrono::high_resolution_clock::now();
+                auto time_hashSearch = chrono::duration<double, micro>(end_hashSearch - start_hashSearch).count();
+                cout << "Item found in " << time_hashSearch << "us." << endl;
+
                 cout << "School " << name << " found:" << endl;
                 cout << "Address: " << school.address << endl;
                 cout << "City   : " << school.city << endl;
@@ -180,7 +195,7 @@ void interface(int choice, SchoolHashTable& table)
             interface(0, table);
             break;
         case 'n':
-            interface(6, table);
+            interface(4, table);
             break;
         }
         break;
@@ -197,7 +212,7 @@ void interface(int choice, SchoolHashTable& table)
             interface(0, table);
             break;
         case 'n':
-            interface(6, table);
+            interface(4, table);
             break;
         }
         break;
@@ -213,7 +228,7 @@ void interface(int choice, SchoolHashTable& table)
             interface(0, table);
             break;
         case 'n':
-            interface(6, table);
+            interface(4, table);
             break;
         }
         break;
