@@ -8,4 +8,8 @@ Set up a GitHub repository to host code and get familiar with the commit system.
 ### Milestone 2
 Write code to load data (Schools & related info) from a .csv file and interact with it in simple ways: searching, deleting, displaying.
 ### Milestone 3
-Extend the previous implementation, using a BST instead of a Linked List.
+Extend the previous implementation, using a BST instead of a Linked List to load schools.
+### Milestone 4
+Extend Milestone 2 again, using a Hash Table instead of a BST.
+### Milestone 5
+Implement timing and larger datasets within all three implementations to compare their performance.
