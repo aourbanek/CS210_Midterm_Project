@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <chrono>
 using namespace std;
 
 struct School
@@ -58,6 +59,8 @@ public:
 
     School* deleteByName(School* node, string name)
     {
+        auto start_BSTdelete = chrono::high_resolution_clock::now();
+
         if (node == nullptr)
         {
             return node;
@@ -102,11 +105,17 @@ public:
             node->right = deleteByName(node->right, replacement->name);
         }
 
+        auto end_BSTdelete = chrono::high_resolution_clock::now();
+        auto time_BSTdelete = chrono::duration<double, micro>(end_BSTdelete - start_BSTdelete).count();
+
+        cout << "Item deleted in " << time_BSTdelete << "us." << endl << endl;
         return node;
     }
 
     void findByName(string name)
     {
+        auto start_BSTsearch = chrono::high_resolution_clock::now();
+
         School* current = root;
 
         while (current && current->name != name)
@@ -126,6 +135,10 @@ public:
             cout << "Error: School not found." << endl;
             return;
         }
+
+        auto end_BSTsearch = chrono::high_resolution_clock::now();
+        auto time_BSTsearch = chrono::duration<double, micro>(end_BSTsearch - start_BSTsearch).count();
+        cout << "Item found in " << time_BSTsearch << "us." << endl;
 
         cout << "School found: " << current->name << endl;
         cout << "Address: " << current->address << endl;
@@ -331,7 +344,11 @@ int main()
     {
         if (item != data[0]) // Skips first line of data labels
         {
+            auto start_BSTinsert = chrono::high_resolution_clock::now();
             tree.insertPublic(item[0], item[1], item[2], item[3], item[4]);
+            auto end_BSTinsert = chrono::high_resolution_clock::now();
+            auto time_BSTinsert = chrono::duration<double, micro>(end_BSTinsert - start_BSTinsert).count();
+            cout << "Item inserted in " << time_BSTinsert << "us." << endl;
         }
     }
 
